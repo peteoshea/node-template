@@ -38,7 +38,7 @@ if (Test-Path -Path "$packagesFilePath" -PathType Leaf) {
 function Install-WinGetPackage {
     param ([string]$Name)
     Write-Host "===> Installing '$Name'"
-    winget install $Name
+    winget install $Name --exact
 }
 
 $packagesFilePath = "$basePath\winget-packages"
