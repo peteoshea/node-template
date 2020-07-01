@@ -56,3 +56,11 @@ if (Test-Path -Path "$packagesFilePath" -PathType Leaf) {
         }
     }
 }
+
+# Setup appropriate version of Node.js from .nvmrc
+$nvmrc = "$basePath\.nvmrc"
+if (Test-Path -Path "$nvmrc" -PathType Leaf) {
+    $nodeVersion = Get-Content -Path "$nvmrc"
+    nvm install $nodeVersion
+    nvm use $nodeVersion
+}

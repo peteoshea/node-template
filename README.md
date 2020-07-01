@@ -3,6 +3,8 @@
 A template repository for a [Node.js](https://nodejs.org/) project.
 This includes scripts to get a development system setup on Windows, Linux or hopefully MacOS.
 
+The version of Node.js can be specified in [.nvmrc](.nvmrc) but be aware that due to restrictions with [nvm-windows](https://github.com/coreybutler/nvm-windows) this needs to be the full version number e.g. 14.5.0 or v12.8.2.
+
 ##  Windows Development
 
 The following scripts will help you maintain your local development system.
