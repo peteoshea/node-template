@@ -136,7 +136,8 @@ then
   [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
   echo "==> Installing appropriate version of node…"
-  nvm install --lts
+  nvm install
+  nvm use
 
   echo "==> Installing npm dependencies…"
   npm install
