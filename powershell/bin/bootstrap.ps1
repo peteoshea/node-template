@@ -20,7 +20,7 @@ if (Test-Path -Path "$packagesFilePath" -PathType Leaf) {
         Exit $LastExitCode
     }
 
-    Write-Host "==> Installing Chocolatey packages..."
+    Write-Host "`n==> Installing Chocolatey packages..."
     $packageList = Get-Content -Path "$packagesFilePath"
     if ($packageList.Count -eq 1) {
         # A single item is treated as a string not an array
@@ -43,7 +43,7 @@ function Install-WinGetPackage {
 
 $packagesFilePath = "$basePath\winget-packages"
 if (Test-Path -Path "$packagesFilePath" -PathType Leaf) {
-    Write-Host "==> Installing winget packages..."
+    Write-Host "`n==> Installing winget packages..."
     $packageList = Get-Content -Path "$packagesFilePath"
     if ($packageList.Count -eq 1) {
         # A single item is treated as a string not an array
@@ -60,6 +60,7 @@ if (Test-Path -Path "$packagesFilePath" -PathType Leaf) {
 # Setup appropriate version of Node.js from .nvmrc
 $nvmrc = "$basePath\.nvmrc"
 if (Test-Path -Path "$nvmrc" -PathType Leaf) {
+    Write-Host "`n==> Installing appropriate version of Node.js..."
     $nodeVersion = Get-Content -Path "$nvmrc"
     nvm install $nodeVersion
     nvm use $nodeVersion
