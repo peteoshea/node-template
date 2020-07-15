@@ -57,11 +57,18 @@ if (Test-Path -Path "$packagesFilePath" -PathType Leaf) {
     }
 }
 
-# Setup appropriate version of Node.js from .nvmrc
-$nvmrc = "$basePath\.nvmrc"
-if (Test-Path -Path "$nvmrc" -PathType Leaf) {
-    Write-Host "`n==> Installing appropriate version of Node.js..."
-    $nodeVersion = Get-Content -Path "$nvmrc"
-    nvm install $nodeVersion
-    nvm use $nodeVersion
+# If package.json file exists then ensure Node.js is setup and run `npm install`
+$packageJson = "$basePath\package.json"
+if (Test-Path -Path "$packageJson" -PathType Leaf) {
+    # Setup appropriate version of Node.js from .nvmrc
+    $nvmrc = "$basePath\.nvmrc"
+    if (Test-Path -Path "$nvmrc" -PathType Leaf) {
+        Write-Host "`n==> Installing appropriate version of Node.js..."
+        $nodeVersion = Get-Content -Path "$nvmrc"
+        nvm install $nodeVersion
+        nvm use $nodeVersion
+    }
+
+    Write-Host "`n==> Installing npm dependencies..."
+    npm install
 }
