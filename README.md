@@ -83,7 +83,6 @@ Simply having the `Brewfile` means Homebrew will be installed and updated.
 
 [bootstrap]: script/bin/bootstrap
 [bootstrap.ps1]: script/bin/bootstrap.ps1
-[ci.yml]: .github/wokflows/ci.yml
 [nvm]: https://github.com/nvm-sh/nvm
 [nvm-windows]: https://github.com/coreybutler/nvm-windows
 [setup]: script/setup
