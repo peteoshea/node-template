@@ -160,7 +160,7 @@ fi
 # If package.json file exists then ensure Node.js is setup and run `npm install`
 if [[ -f "package.json" ]]
 then
-  echo "==> Installing nvm (node version manager)..."
+  output_message "Installing nvm (node version manager)…"
   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash
 
   # Add the following so nvm can be used within this script
@@ -170,10 +170,10 @@ then
   # shellcheck source=/dev/null
   [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-  echo "==> Installing appropriate version of Node.js..."
+  output_message "Installing appropriate version of Node.js…"
   nvm install
   nvm use
 
-  echo "==> Installing npm dependencies..."
+  output_message "Installing npm dependencies…"
   npm install
 fi
