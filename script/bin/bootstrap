@@ -160,8 +160,20 @@ fi
 # If package.json file exists then ensure Node.js is setup and run `npm install`
 if [[ -f "package.json" ]]
 then
-  output_message "Installing nvm (node version manager)…"
+  if [[ -d ~/.nvm ]]
+  then
+    nvm_already_installed=true
+    output_message "Updating nvm (node version manager)…"
+  else
+    nvm_already_installed=false
+    output_message "Installing nvm (node version manager)…"
+  fi
   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash
+  if [[ $nvm_already_installed = false ]]
+  then
+    output_message "Please restart your shell and run 'nvm install node' then run this script again"
+    exit 1
+  fi
 
   # Add the following so nvm can be used within this script
   export NVM_DIR="$HOME/.nvm"
