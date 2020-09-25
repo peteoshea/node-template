@@ -66,17 +66,17 @@ if (Test-Path -Path "$packageJson" -PathType Leaf) {
     # Setup appropriate version of Node.js from .nvmrc
     $nvmrc = "$basePath\.nvmrc"
     if (Test-Path -Path "$nvmrc" -PathType Leaf) {
-        Write-Host "`n==> Installing appropriate version of Node.js..."
+        Write-Output "`n==> Installing appropriate version of Node.js..."
         $nodeVersion = Get-Content -Path "$nvmrc"
         nvm install $nodeVersion
         nvm use $nodeVersion
     }
 
-    Write-Host "`n==> Installing npm dependencies..."
-    Write-Host "Where is npm running from:"
+    Write-Output "`n==> Installing npm dependencies..."
+    Write-Output "Where is npm running from:"
     where.exe npm
-    Write-Host "What version of npm:"
+    Write-Output "What version of npm:"
     npm -v
-    Write-Host "Install npm packages..."
+    Write-Output "Install npm packages..."
     npm install
 }
