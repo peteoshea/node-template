@@ -14,5 +14,5 @@ jobs:
         shell: pwsh
 
       - name: Run the test powershell script
-        run: script/test
+        run: script/test.ps1
         shell: pwsh
