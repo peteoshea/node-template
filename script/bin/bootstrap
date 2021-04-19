@@ -207,9 +207,12 @@ then
   [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
   output_message "Installing appropriate version of Node.js…"
-  nvm install
+  nvm install --latest-npm
   nvm use
 
   output_message "Installing npm dependencies…"
   npm install
+
+  output_message "Checking for outdated packages..."
+  npm outdated
 fi

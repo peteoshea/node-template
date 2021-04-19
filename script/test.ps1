@@ -5,21 +5,40 @@ param(
   $Test
 )
 
-$scriptPath = Split-Path -Path $PSCommandPath -Parent
+function Undo-Location {
+  Pop-Location
+  Write-Output "Change directory back to: $(Get-Location)"
+}
 
 Write-Output "`n==> Start running tests at $(Get-Date)"
 
-if ($PSBoundParameters.ContainsKey('Test')) {
-  & "$scriptPath\bin\checkScripts.ps1" $Test
-} else {
-  & "$scriptPath\bin\checkScripts.ps1"
-}
+$scriptPath = Split-Path -Path $PSCommandPath -Parent
+$basePath = Split-Path -Path $scriptPath -Parent
+Push-Location "$basePath"
+Write-Output "Change directory to: $basePath"
 
-Write-Output "`n==> Script analysis finished at $(Get-Date)`n"
-
+& "$scriptPath\bin\checkScripts.ps1"
+Write-Output "`n==> PowerShell script analysis finished at $(Get-Date)"
 if ($LastExitCode) {
-  Write-Output "checkScripts failed with exit code: $LastExitCode"
+  Undo-Location
+  Write-Output "`ncheckScripts failed with exit code: $LastExitCode"
   Exit $LastExitCode
 }
 
-Write-Output "==> Tests finished at $(Get-Date)`n"
+# Do not run Node tests during CI as will already have been run in the bash script
+if ([System.Environment]::GetEnvironmentVariable("CI") -ne "true") {
+  Write-Output "`n==> Start running Node tests at $(Get-Date)"
+  if ($PSBoundParameters.ContainsKey('Test')) {
+    npm test $Test
+  } else {
+    npm test
+  }
+  if ($LastExitCode) {
+    Undo-Location
+    Write-Output "`nNode tests failed with exit code: $LastExitCode"
+    Exit $LastExitCode
+  }
+}
+
+Undo-Location
+Write-Output "`n==> Tests finished at $(Get-Date)`n"
