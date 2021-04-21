@@ -1,7 +1,8 @@
 {
   "editor.formatOnSave": true,
   "editor.rulers": [100],
+  "powershell.codeFormatting.preset": "OTBS",
   "workbench.colorCustomizations": {
-    "statusBar.background" : "#68A063"
+    "statusBar.background": "#68A063"
   }
 }
