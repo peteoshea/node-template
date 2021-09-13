@@ -17,6 +17,6 @@
   },
   "homepage": "https://github.com/peteoshea/node-template#readme",
   "devDependencies": {
-    "jest": "^27.1.1"
+    "jest": "^27.2.0"
   }
 }
